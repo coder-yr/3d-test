@@ -101,7 +101,6 @@ export default function HotelScroll() {
                 canvas.style.width = `${width}px`;
                 canvas.style.height = `${height}px`;
 
-                context.scale(dpr, dpr);
                 render();
             };
 
