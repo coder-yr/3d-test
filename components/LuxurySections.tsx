@@ -8,9 +8,9 @@ import { useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const suites = [
-    { name: "The Royal Suite", desc: "A sanctuary of gold and velvet.", price: "From ₹45,000" },
-    { name: "Ocean Panorama", desc: "Wake up to infinity.", price: "From ₹32,000" },
-    { name: "Garden Villa", desc: "Nature's private embrace.", price: "From ₹28,000" },
+    { name: "The Royal Suite", desc: "A sanctuary of gold and velvet.", price: "From ₹45,000", img: "/suites/royal.png" },
+    { name: "Ocean Panorama", desc: "Wake up to infinity.", price: "From ₹32,000", img: "/suites/ocean.png" },
+    { name: "Garden Villa", desc: "Nature's private embrace.", price: "From ₹28,000", img: "/suites/garden.png" },
 ];
 
 export default function LuxurySections() {
@@ -57,11 +57,9 @@ export default function LuxurySections() {
     return (
         <div ref={containerRef} className="relative z-10 bg-[#050505] text-white">
 
-            {/* Spacer to separate from scrolling canvas if needed, though scrollytelling ends cleanly */}
-
             {/* Marquee Section */}
             <div className="marquee-container py-32 overflow-hidden border-t border-white/5">
-                <h2 className="marquee-text text-[12vw] font-thin whitespace-nowrap leading-none tracking-tighter text-white/5 uppercase select-none">
+                <h2 className="marquee-text text-[12vw] font-thin whitespace-nowrap leading-none tracking-tighter text-white/20 uppercase select-none">
                     Luxury Redefined &nbsp;—&nbsp; Logify Hospitality &nbsp;—&nbsp;
                 </h2>
             </div>
@@ -83,8 +81,13 @@ export default function LuxurySections() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {suites.map((suite, i) => (
                         <div key={i} className="group relative overflow-hidden bg-white/5 aspect-[3/4] cursor-pointer hover:bg-white/10 transition-colors duration-500">
-                            {/* Placeholder for Suite Image */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
+                            {/* Suite Image */}
+                            <img
+                                src={suite.img}
+                                alt={suite.name}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
 
                             <div className="absolute bottom-0 left-0 p-8 w-full">
                                 <h4 className="text-2xl font-light mb-2">{suite.name}</h4>
@@ -102,31 +105,49 @@ export default function LuxurySections() {
             {/* DINING & WELLNESS SPLIT */}
             <section id="dining" className="reveal-section grid grid-cols-1 md:grid-cols-2 min-h-screen border-t border-white/5">
                 {/* Dining */}
-                <div className="relative p-12 md:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/5 hover:bg-white/[0.02] transition-colors duration-700">
-                    <span className="text-[#d4af37] text-xs tracking-[0.3em] uppercase mb-6">Culinary</span>
-                    <h3 className="text-6xl font-thin tracking-tight mb-8">
-                        The <span className="font-serif italic">Grand</span> Table
-                    </h3>
-                    <p className="text-white/60 max-w-md font-light leading-relaxed mb-12">
-                        An experiential journey of flavors. Savor authentic ingredients sourced from local artisans, crafted into masterpieces.
-                    </p>
-                    <button className="self-start text-xs tracking-[0.2em] uppercase border-b border-[#d4af37] pb-1 hover:text-[#d4af37] transition-colors">
-                        Discover Menus
-                    </button>
+                <div className="group relative p-12 md:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/5 hover:bg-white/[0.02] transition-colors duration-700 overflow-hidden">
+
+                    {/* Background Image */}
+                    <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                        <img src="/sections/dining.png" alt="Dining" className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700"></div>
+                    </div>
+
+                    <div className="relative z-10">
+                        <span className="text-[#d4af37] text-xs tracking-[0.3em] uppercase mb-6 block">Culinary</span>
+                        <h3 className="text-6xl font-thin tracking-tight mb-8">
+                            The <span className="font-serif italic">Grand</span> Table
+                        </h3>
+                        <p className="text-white/60 max-w-md font-light leading-relaxed mb-12">
+                            An experiential journey of flavors. Savor authentic ingredients sourced from local artisans, crafted into masterpieces.
+                        </p>
+                        <button className="self-start text-xs tracking-[0.2em] uppercase border-b border-[#d4af37] pb-1 hover:text-[#d4af37] transition-colors">
+                            Discover Menus
+                        </button>
+                    </div>
                 </div>
 
                 {/* Wellness */}
-                <div id="wellness" className="relative p-12 md:p-24 flex flex-col justify-center hover:bg-white/[0.02] transition-colors duration-700">
-                    <span className="text-[#d4af37] text-xs tracking-[0.3em] uppercase mb-6">Wellness</span>
-                    <h3 className="text-6xl font-thin tracking-tight mb-8">
-                        Serenity <span className="font-serif italic">Spa</span>
-                    </h3>
-                    <p className="text-white/60 max-w-md font-light leading-relaxed mb-12">
-                        Rejuvenate your senses with ancient therapies designed to restore balance and harmony to your body and soul.
-                    </p>
-                    <button className="self-start text-xs tracking-[0.2em] uppercase border-b border-[#d4af37] pb-1 hover:text-[#d4af37] transition-colors">
-                        Book Therapy
-                    </button>
+                <div id="wellness" className="group relative p-12 md:p-24 flex flex-col justify-center hover:bg-white/[0.02] transition-colors duration-700 overflow-hidden">
+
+                    {/* Background Image */}
+                    <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                        <img src="/sections/wellness.png" alt="Wellness" className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700"></div>
+                    </div>
+
+                    <div className="relative z-10">
+                        <span className="text-[#d4af37] text-xs tracking-[0.3em] uppercase mb-6 block">Wellness</span>
+                        <h3 className="text-6xl font-thin tracking-tight mb-8">
+                            Serenity <span className="font-serif italic">Spa</span>
+                        </h3>
+                        <p className="text-white/60 max-w-md font-light leading-relaxed mb-12">
+                            Rejuvenate your senses with ancient therapies designed to restore balance and harmony to your body and soul.
+                        </p>
+                        <button className="self-start text-xs tracking-[0.2em] uppercase border-b border-[#d4af37] pb-1 hover:text-[#d4af37] transition-colors">
+                            Book Therapy
+                        </button>
+                    </div>
                 </div>
             </section>
 

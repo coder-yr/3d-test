@@ -21,7 +21,7 @@ export default function Header() {
     return (
         <header
             ref={headerRef}
-            className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 py-6 mix-blend-difference"
+            className="fixed top-0 left-0 right-0 z-50 flex h-20 items-center justify-between bg-[#050505] px-8 py-0 shadow-lg shadow-black/20"
         >
             {/* Logo */}
             <Link href="/" className="text-2xl font-light tracking-[0.2em] text-[#d4af37] uppercase z-50">

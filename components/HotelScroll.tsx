@@ -90,8 +90,18 @@ export default function HotelScroll() {
             };
 
             const handleResize = () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+                const dpr = window.devicePixelRatio || 1;
+                // Use container dimensions if possible, or window minus header
+                // For accurate fit in the new shorter container:
+                const width = window.innerWidth;
+                const height = window.innerHeight - 80; // Subtract header height (5rem = 80px)
+
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                canvas.style.width = `${width}px`;
+                canvas.style.height = `${height}px`;
+
+                context.scale(dpr, dpr);
                 render();
             };
 
@@ -227,8 +237,8 @@ export default function HotelScroll() {
                 </div>
             )}
 
-            {/* Sticky Canvas Container */}
-            <div className="sticky top-0 h-screen w-full overflow-hidden">
+            {/* Sticky Canvas Container - Adjusted for 80px (h-20) header */}
+            <div className="sticky top-20 h-[calc(100vh-5rem)] w-full overflow-hidden">
                 <canvas
                     ref={canvasRef}
                     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
